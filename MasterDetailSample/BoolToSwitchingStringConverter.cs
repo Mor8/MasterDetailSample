@@ -12,10 +12,14 @@ namespace MasterDetailSample
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
-                return "Disable";
-            else
-                return "Enable";
+            if(value != null)
+            {
+                if ((bool)value)
+                    return "Disable";
+                else
+                    return "Enable";
+            }
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -25,12 +25,12 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ListBox ItemsSource="{Binding Persons}" FontSize="16" x:Name="_master" SelectedItem="{Binding SelectedPerson.IsValid}">
+            <ListBox ItemsSource="{Binding}" FontSize="16" x:Name="_master" HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="{Binding SelectedPerson.IsValid}"/>
+                        <MenuItem DataContext="{Binding CurrentItem}" Header="{Binding IsValid, Converter={StaticResource BoolToSwitchingStringConverter}}" Click="MenuItem_Click" />
                         <Separator />
-                        <MenuItem Header="Create"/>
+                        <MenuItem Header="Create" />
                         <Separator />
                         <MenuItem Header="Rename" />
                         <MenuItem Header="Delete" />
@@ -39,8 +39,8 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Opacity="{Binding IsValid, Converter={StaticResource BoolToOpacityConverter}}">
-                            <CheckBox HorizontalAlignment="Center" Margin="5,5,5,0" IsChecked="{Binding IsValid}"/>
-                            <TextBlock Text="{Binding Name}"/>
+                            <CheckBox HorizontalAlignment="Stretch" Margin="5,5,5,0" IsChecked="{Binding IsValid}" VerticalAlignment="Stretch"/>
+                            <TextBox Text="{Binding Name}" IsReadOnly="True"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

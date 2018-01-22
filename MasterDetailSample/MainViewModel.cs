@@ -14,7 +14,5 @@ namespace MasterDetailSample
             get;
             set;
         }
-
-        public Person SelectedPerson { get; set; }
     }
 }
