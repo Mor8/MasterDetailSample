@@ -26,9 +26,12 @@ namespace MasterDetailSample
         {
             InitializeComponent();
 
-            DataContext = new ObservableCollection<Person> {
+            DataContext = new MainViewModel
+            {
+                Persons = new ObservableCollection<Person> {
                     new Person { Name = "Adam", Age = 10, IsValid = true},
                     new Person {Name = "Eve", Age = 45, IsValid = false }
+                }
             };
         }
     }

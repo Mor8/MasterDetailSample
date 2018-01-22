@@ -25,10 +25,10 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ListBox ItemsSource="{Binding}" FontSize="16" x:Name="_master" HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
+            <ListBox ItemsSource="{Binding Persons}" FontSize="16" x:Name="_master" HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem DataContext="{Binding CurrentItem}" Header="{Binding IsValid, Converter={StaticResource BoolToSwitchingStringConverter}}" Click="MenuItem_Click" />
+                        <MenuItem DataContext="{Binding Persons}" Header="{Binding IsValid, Converter={StaticResource BoolToSwitchingStringConverter}}"/>
                         <Separator />
                         <MenuItem Header="Create" />
                         <Separator />
