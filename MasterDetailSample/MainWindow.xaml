@@ -1,0 +1,61 @@
+﻿<Window x:Class="MasterDetailSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MasterDetailSample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:BoolToOpacityConverter x:Key="BoolToOpacityConverter"/>
+        <local:BoolToSwitchingStringConverter x:Key="BoolToSwitchingStringConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Persons}" FontSize="16" x:Name="_master" SelectedItem="{Binding SelectedPerson.IsValid}">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{Binding SelectedPerson.IsValid}"/>
+                        <Separator />
+                        <MenuItem Header="Create"/>
+                        <Separator />
+                        <MenuItem Header="Rename" />
+                        <MenuItem Header="Delete" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Opacity="{Binding IsValid, Converter={StaticResource BoolToOpacityConverter}}">
+                            <CheckBox HorizontalAlignment="Center" Margin="5,5,5,0" IsChecked="{Binding IsValid}"/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Column="1" TextBlock.FontSize="16" DataContext="{Binding SelectedItem, ElementName=_master}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Margin="6" Text="{Binding Age, StringFormat='Age: \{0\}'}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
