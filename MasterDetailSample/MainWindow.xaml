@@ -41,16 +41,17 @@
                         <MenuItem Header="Delete" />
                     </ContextMenu>
                 </ListBox.ContextMenu>
+                <ListBox.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="ListBoxItem.HorizontalAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Opacity="{Binding IsValid, Converter={StaticResource BoolToOpacityConverter}}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <DockPanel Opacity="{Binding IsValid, Converter={StaticResource BoolToOpacityConverter}}" LastChildFill="True">
                             <CheckBox HorizontalAlignment="Stretch" Margin="5,5,5,0" IsChecked="{Binding IsValid}"/>
                             <TextBox Grid.Column="1" Text="{Binding Name}" IsReadOnly="True" HorizontalAlignment="Stretch"/>
-                        </Grid>
+                        </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
