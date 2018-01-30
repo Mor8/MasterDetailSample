@@ -30,7 +30,16 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ListBox ItemsSource="{Binding Persons}" FontSize="16" x:Name="_master" HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
+            <ListBox ItemsSource="{Binding Persons}" FontSize="16" HorizontalContentAlignment="Stretch" IsSynchronizedWithCurrentItem="True">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                                <Setter Property="IsSelected" Value="true" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Resources>
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem DataContext="{Binding Persons}" Header="{Binding IsValid, Converter={StaticResource BoolToSwitchingStringConverter}}"/>
@@ -41,16 +50,11 @@
                         <MenuItem Header="Delete" />
                     </ContextMenu>
                 </ListBox.ContextMenu>
-                <ListBox.ItemContainerStyle>
-                    <Style>
-                        <Setter Property="ListBoxItem.HorizontalAlignment" Value="Stretch"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel Opacity="{Binding IsValid, Converter={StaticResource BoolToOpacityConverter}}" LastChildFill="True">
+                        <DockPanel Opacity="{Binding IsValid, Converter={StaticResource BoolToOpacityConverter}}">
                             <CheckBox HorizontalAlignment="Stretch" Margin="5,5,5,0" IsChecked="{Binding IsValid}"/>
-                            <TextBox Grid.Column="1" Text="{Binding Name}" IsReadOnly="True" HorizontalAlignment="Stretch"/>
+                            <TextBox Text="{Binding Name}" IsReadOnly="True" HorizontalAlignment="Stretch"/>
                         </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
